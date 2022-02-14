@@ -52,6 +52,7 @@ function makeCard(toy) {
   div.addEventListener('click', () =>{
     toy.likes ++
     div.querySelector('p').textContent =  `${toy.likes} Likes`
+    updateLikes(toy)
   })
 }
 
@@ -65,13 +66,13 @@ function postCard(newCard){
   body: JSON.stringify(newCard)
 })}
 
-function updateLikes(e){
-  fetch(`http://localhost:3000/toys/:${e.target.id}`,{
+function updateLikes(toy){
+  fetch(`http://localhost:3000/toys/${toy.id}`,{
     method : 'PATCH' ,
     headers:{
       "Content-Type": "application/json",
       Accept: "application/json"
     } ,
-    body : JSON.stringify(newCard)
+    body : JSON.stringify(toy)
   })
 }
